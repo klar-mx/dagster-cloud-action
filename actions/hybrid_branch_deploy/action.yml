@@ -43,7 +43,7 @@ runs:
         # We need to get the local action ref, but this is available in the evaluation of `env`, not
         # during the run time evaluation or the parameter evaluation:
         # https://github.com/orgs/community/discussions/25283
-        DAGSTER_ACTION_REF: ${{ github.repository != 'dagster-io/dagster-cloud-action' && github.action_ref || github.head_ref }}
+        DAGSTER_ACTION_REF: ${{ github.repository != 'klar-mx/dagster-cloud-action' && github.action_ref || github.head_ref }}
 
     - name: Install Wheel, SetupTools, Virtual Environment, and PIPx
       shell: bash
