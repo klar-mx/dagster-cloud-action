@@ -34,7 +34,7 @@ runs:
     - name: Checkout action repo
       uses: actions/checkout@v3
       with:
-        repository: dagster-io/dagster-cloud-action
+        repository: klar-mx/dagster-cloud-action
         ref: ${{ env.DAGSTER_ACTION_REF }}
         path: ./action-repo/
       env:
@@ -43,7 +43,13 @@ runs:
         # We need to get the local action ref, but this is available in the evaluation of `env`, not
         # during the run time evaluation or the parameter evaluation:
         # https://github.com/orgs/community/discussions/25283
-        DAGSTER_ACTION_REF: ${{ github.repository != 'dagster-io/dagster-cloud-action' && github.action_ref || github.head_ref }}
+        DAGSTER_ACTION_REF: ${{ github.repository != 'klar-mx/dagster-cloud-action' && github.action_ref || github.head_ref }}
+
+      - name: Install Wheel, SetupTools, Virtual Environment, and PIPx
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --force --no-cache pygithub
 
     - name: Notify build start
       uses: ./action-repo/actions/utils/notify
