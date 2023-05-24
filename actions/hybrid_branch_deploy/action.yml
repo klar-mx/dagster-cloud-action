@@ -35,7 +35,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: klar-mx/dagster-cloud-action
-        ref: ${{ env.DAGSTER_ACTION_REF }}
+        ref: klar
         path: ./action-repo/
       env:
         # We need to make sure we are grabbing the right ref for both external invocation of the
