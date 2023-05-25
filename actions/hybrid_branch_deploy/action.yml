@@ -51,16 +51,16 @@ runs:
         python -m pip install --upgrade pip
         python -m pip install --force --no-cache pygithub
 
-    - name: Notify build start
-      uses: ./action-repo/actions/utils/notify
-      continue-on-error: true
-      with:
-        organization_id: ${{ inputs.organization_id }}
-        action: "pending"
-        pr: "${{ github.event.number }}"
-        location: ${{ inputs.location }}
-      env:
-        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+    # - name: Notify build start
+    #   uses: ./action-repo/actions/utils/notify
+    #   continue-on-error: true
+    #   with:
+    #     organization_id: ${{ inputs.organization_id }}
+    #     action: "pending"
+    #     pr: "${{ github.event.number }}"
+    #     location: ${{ inputs.location }}
+    #   env:
+    #     GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
 
     - name: Set up Docker Buildx
       if: ${{ github.event.pull_request.state != 'closed' }}
@@ -94,26 +94,26 @@ runs:
         DAGSTER_CLOUD_API_TOKEN: ${{ inputs.dagster_cloud_api_token }}
 
     # Optional steps, leaves PR comment about build status
-    - name: Notify build success
-      uses: ./action-repo/actions/utils/notify
-      continue-on-error: true
-      with:
-        organization_id: ${{ inputs.organization_id }}
-        action: "complete"
-        pr: "${{ github.event.number }}"
-        location: ${{ inputs.location }}
-        deployment: ${{ steps.deploy.outputs.deployment }}
-      env:
-        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+    # - name: Notify build success
+    #   uses: ./action-repo/actions/utils/notify
+    #   continue-on-error: true
+    #   with:
+    #     organization_id: ${{ inputs.organization_id }}
+    #     action: "complete"
+    #     pr: "${{ github.event.number }}"
+    #     location: ${{ inputs.location }}
+    #     deployment: ${{ steps.deploy.outputs.deployment }}
+    #   env:
+    #     GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
 
-    - name: Notify build failure
-      if: ${{ failure() }}
-      uses: ./action-repo/actions/utils/notify
-      continue-on-error: true
-      with:
-        organization_id: ${{ inputs.organization_id }}
-        action: "failed"
-        pr: "${{ github.event.number }}"
-        location: ${{ inputs.location }}
-      env:
-        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+    # - name: Notify build failure
+    #   if: ${{ failure() }}
+    #   uses: ./action-repo/actions/utils/notify
+    #   continue-on-error: true
+    #   with:
+    #     organization_id: ${{ inputs.organization_id }}
+    #     action: "failed"
+    #     pr: "${{ github.event.number }}"
+    #     location: ${{ inputs.location }}
+    #   env:
+    #     GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
